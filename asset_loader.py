@@ -110,3 +110,23 @@ class AssetLoader:
         # Draw each picture at its specified position
         for _, (image, pos) in self.pictures.items():
             screen.blit(image, pos)
+
+
+def convert_to_pixels(value, viewport):
+        """
+        Convert a value to pixels based on the viewport size.
+        :param value: The value to convert (can be a percentage or an absolute value).
+        :param viewport: The size of the viewport (width, height).
+        :return: The value in pixels.
+        """
+        if value == "full":
+            return viewport
+        elif value == "center":
+            return viewport // 2
+        if isinstance(value, str) and value.endswith("%"):
+            percent = float(value[:-1]) / 100
+            return int(viewport * percent)
+        elif isinstance(value, int):
+            return value
+        else:
+            raise ValueError(f"Invalid value {value} for conversion to pixels.")

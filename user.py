@@ -1,7 +1,8 @@
 
 import pygame
 from pygame.locals import *
-from consts import USER_GRAPH_COLOR, USER_GRAPH_MAX_POINTS
+from consts import USER_GRAPH_COLOR, USER_GRAPH_MAX_POINTS, GREEN
+from asset_loader import convert_to_pixels
 
 class User:
     def __init__(self, screen, x_range, y_range, sub_surface, max_points=USER_GRAPH_MAX_POINTS, color=USER_GRAPH_COLOR, graph_line_width=3, step=[1, 10]):
@@ -83,13 +84,56 @@ class User:
         self.score = round(max(0, 100 * (1 - mse / max_error)))
         return self.score
     
-    def show_score(self):
+    def show_score(self, bar):
         """
         Display the score on the screen.
+        :param bar: (pos_x, pos_y, width, height) of the bar to draw the score.
         """
-        font = pygame.font.Font(None, 36)  # Create a font object
-        score_text = font.render(f"Score: {self.score}", True, (0, 0, 0))
-        self.screen.blit(score_text, (10, 10))
+
+        def draw_gradient_bar(screen, pos_x, pos_y, width, height, value):
+            """
+            Draws a vertical bar with a green-to-red gradient based on the value (0–100).
+            :param screen: The screen to draw on.
+            :param pos_x: The x position of the bar.
+            :param pos_y: The y position of the bar.
+            :param width: The width of the bar.
+            :param height: The height of the bar.
+            :param value: The value to represent (0–100).
+            """
+            # Clamp value between 0 and 100
+            value = max(0, min(100, value))
+            
+            # Height to draw based on value
+            visible_height = int(height * (value / 100))
+
+            # Draw gradient from bottom to top (red to green)
+            for i in range(visible_height):
+                # Interpolate color: red (255,0,0) to green (0,255,0)
+                ratio = i / height
+                r = int(255 * (1 - ratio))
+                g = int(255 * ratio)
+                color = (r, g, 0)
+
+                # Draw horizontal line (1-pixel high rect)
+                pygame.draw.rect(
+                    screen,
+                    color,
+                    pygame.Rect(pos_x, pos_y + height - i - 1, width, 1)
+                )
+
+        # Draw the gradient bar
+        pos_x = convert_to_pixels(bar[0], self.screen.get_width())
+        pos_y = convert_to_pixels(bar[1], self.screen.get_height())
+        width = convert_to_pixels(bar[2], self.screen.get_width())
+        height = convert_to_pixels(bar[3], self.screen.get_height())
+        
+        draw_gradient_bar(self.screen, pos_x, pos_y, width, height, self.score)
+        # Draw the score text
+        font = pygame.font.Font(None, 70)
+        text_surface = font.render(f"{self.score}%", True, (0, 0, 0))
+        text_rect = text_surface.get_rect(center=(pos_x + width // 2, pos_y - 30))
+        self.screen.blit(text_surface, text_rect)  # Blit the text surface onto the main screen
+
 
     def draw_graph(self):
         """
@@ -142,3 +186,11 @@ class User:
                                                     pos_y + height),
                                                     (pos_x + int((self.position[0] - self.x_range[0]) * self.scale[0]),
                                                     pos_y + height), 10)
+            
+    def render_all(self):
+        """
+        Render all user elements on the screen.
+        """
+        self.draw_graph()
+        self.show_score(bar=("10%", "35%", "7%", "40%"))
+        self.draw_user_lines()

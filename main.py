@@ -4,9 +4,7 @@ from consts import *
 from asset_loader import *
 from graph import Graph
 from user import User
-import time
 import math
-import random
 
 """
 This file contains the main function for the exhibit
@@ -171,9 +169,7 @@ def main():
         # Draw the graph on the grid
         graphs[graph_index].draw()
 
-        user.draw_graph()
-        user.show_score()
-        user.draw_user_lines()
+        user.render_all()
 
         # time.sleep(TIME_DELAY)  # Delay to control the speed of the car
 
