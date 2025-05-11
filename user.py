@@ -29,6 +29,13 @@ class User:
 
         _, _, width, height = self.sub_surface
         self.scale = [width / (self.x_range[1] - self.x_range[0]), height / (self.y_range[1] - self.y_range[0])]  # Scale factors for x and y axes
+
+    def reset(self):
+        """
+        Reset the user position and points.
+        """
+        self.position[0] = self.x_range[0]  # Reset x position to min_x
+        self.user_points.clear()  # Clear user points
     
     def move_x(self):
         """
@@ -38,8 +45,7 @@ class User:
         self.position[0] += self.step[0]
 
         if self.position[0] > self.x_range[1]:
-            self.position[0] = self.x_range[0]
-            self.user_points.clear()  # Clear user points when wrapping around
+            self.reset()  # Reset the user position if it exceeds max_x (wrap around)
             return True
         
         return False

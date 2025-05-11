@@ -3,9 +3,10 @@ from pygame.locals import *
 from consts import *
 from asset_loader import *
 from graph import Graph
-from math import pi, sin, cos, tan, atan2, sqrt
 from user import User
 import time
+import math
+import random
 
 """
 This file contains the main function for the exhibit
@@ -41,17 +42,67 @@ def main():
                 ),
             )
 
+    def cool_function(x):
+        """
+        x: in range [0, 1000]
+        returns y in range roughly [-500, 500]
+        """
+        y = 250 * math.sin(x * 0.02)                                # Base wave
+        y += 120 * math.sin(x * 0.1 + math.sin(x * 0.03))          # Nested sine wave
+        y += 90 * math.cos(x * 0.005 + math.sin(x * 0.01))         # Curvy wiggles
+        y += 70 * math.tan(math.sin(x * 0.004)) / 2                # Occasional spikes
+        y += 80 * math.exp(-((x - 700)**2) / 5000)                 # Sharp bump
+        return y
+    
     # Create a graph object
-    graphs = [Graph(
+    graphs = [
+            Graph(
                 screen,
-                lambda x: 300 * sin(0.02*x),
+                lambda x: 500 - x,
                 (0, 1000), (-500, 500),
                 (
                     asset_loader.pictures["grid"][1][0],
                     asset_loader.pictures["grid"][1][1],
                     asset_loader.pictures["grid"][0].get_width(),
                     asset_loader.pictures["grid"][0].get_height()
-                )
+                ),
+                title="Linear Function"
+            ),
+            Graph(
+                screen,
+                lambda x: -0.001 * (x)**2 + 500,
+                (0, 1000), (-500, 500),
+                (
+                    asset_loader.pictures["grid"][1][0],
+                    asset_loader.pictures["grid"][1][1],
+                    asset_loader.pictures["grid"][0].get_width(),
+                    asset_loader.pictures["grid"][0].get_height()
+                ),
+                title="Quadratic Function"
+            ),
+            Graph(
+                screen,
+                lambda x: 0.0036*(x-500)**2 - 400,
+                (0, 1000), (-500, 500),
+                (
+                    asset_loader.pictures["grid"][1][0],
+                    asset_loader.pictures["grid"][1][1],
+                    asset_loader.pictures["grid"][0].get_width(),
+                    asset_loader.pictures["grid"][0].get_height()
+                ),
+                title="Stop and Go"
+            ),
+            Graph(
+                screen,
+                lambda x: 300 * math.sin(0.02*x),
+                (0, 1000), (-500, 500),
+                (
+                    asset_loader.pictures["grid"][1][0],
+                    asset_loader.pictures["grid"][1][1],
+                    asset_loader.pictures["grid"][0].get_width(),
+                    asset_loader.pictures["grid"][0].get_height()
+                ),
+                title="Sine Function"
             ),
             Graph(
                 screen,
@@ -62,18 +113,20 @@ def main():
                     asset_loader.pictures["grid"][1][1],
                     asset_loader.pictures["grid"][0].get_width(),
                     asset_loader.pictures["grid"][0].get_height()
-                )
+                ),
+                title="Zero Function"
             ),
             Graph(
                 screen,
-                lambda x: x - 500,
+                cool_function,
                 (0, 1000), (-500, 500),
                 (
                     asset_loader.pictures["grid"][1][0],
                     asset_loader.pictures["grid"][1][1],
                     asset_loader.pictures["grid"][0].get_width(),
                     asset_loader.pictures["grid"][0].get_height()
-                )
+                ),
+                title="Complicated Function"
             )]
     graph_index = 0
 
@@ -90,6 +143,14 @@ def main():
                 
                 elif event.key == K_DOWN:
                     user.move_y(False)
+                
+                elif event.key == K_LEFT:
+                    graph_index = (graph_index - 1) % len(graphs)
+                    user.reset()
+
+                elif event.key == K_RIGHT:
+                    graph_index = (graph_index + 1) % len(graphs)
+                    user.reset()
             
             if event.type == pygame.MOUSEWHEEL:
                 if event.y > 0:

@@ -12,7 +12,7 @@ from consts import GRAPH_COLOR
 
 class Graph:
 
-    def __init__(self, screen, function, x_range, y_range, sub_surface, color=GRAPH_COLOR, width=3, step=1):
+    def __init__(self, screen, function, x_range, y_range, sub_surface, title, color=GRAPH_COLOR, width=3, step=1):
         """
         Initialize the graph with a function, x and y ranges, sub-surface, color and width.
         :param screen: The screen to draw on.
@@ -20,6 +20,7 @@ class Graph:
         :param x_range: The range of x values (x_min, x_max) for the graph.
         :param y_range: The range of y values (y_min, y_max) for the graph.
         :param sub_surface: (pos_x, pos_y, width, height) of the sub-surface (the area where the graph will be drawn).
+        :param title: The title of the graph.
         :param color: The color of the graph.
         :param width: The width of the graph line.
         :param step: The step size for the x values.
@@ -29,6 +30,7 @@ class Graph:
         self.x_range = x_range
         self.y_range = y_range
         self.sub_surface = sub_surface
+        self.title = title
         self.color = color
         self.width = width
         self.step = step
@@ -53,7 +55,11 @@ class Graph:
             points.append((x, y))  # Append the point to the list
         if len(points) < 2:
             return  # Not enough points to draw a line
-        
+
+        screen_points = [(int((x - self.x_range[0]) * x_scale),
+                          int((y - self.y_range[0]) * y_scale)) for x, y in points]  # Convert to screen coordinates
+        pygame.draw.lines(graph_surface, self.color, False, screen_points, self.width)  # Draw the line on the graph surface
+
         font = pygame.font.Font(None, 24)
         text_x_min = font.render(f"X: {round(self.x_range[0], 2)}", True, (0, 0, 0))
         text_x_max = font.render(f"X: {round(self.x_range[1], 2)}", True, (0, 0, 0))
@@ -65,8 +71,10 @@ class Graph:
         graph_surface.blit(text_y_min, (5, height - 30))
         graph_surface.blit(text_y_max, (5, 5))
 
-        screen_points = [(int((x - self.x_range[0]) * x_scale),
-                          int((y - self.y_range[0]) * y_scale)) for x, y in points]  # Convert to screen coordinates
-        pygame.draw.lines(graph_surface, self.color, False, screen_points, self.width)  # Draw the line on the graph surface
-
         self.screen.blit(graph_surface, (pos_x, pos_y))  # Blit the graph surface onto the main screen
+
+        # Draw the title
+        font = pygame.font.Font(None, 45)
+        title_surface = font.render(self.title, True, (0, 0, 0))
+        title_rect = title_surface.get_rect(center=(pos_x + width // 2, pos_y + 20))
+        self.screen.blit(title_surface, title_rect)
