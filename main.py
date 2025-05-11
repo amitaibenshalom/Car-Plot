@@ -33,13 +33,21 @@ def main():
         asset_loader.render(screen)
 
         # Create a graph object
-        graph = Graph(lambda x: 100 * sin(x))
+        graph = Graph(
+                        screen,
+                        lambda x: 100 * sin(x),
+                        (-2*pi, 2*pi), (-200, 200),
+                        (
+                            asset_loader.pictures["grid"][1][0],
+                            asset_loader.pictures["grid"][1][1],
+                            asset_loader.pictures["grid"][0].get_width(),
+                            asset_loader.pictures["grid"][0].get_height()
+                        ),
+                        color=GRAPH_COLOR, width=GRAPH_WIDTH
+                    )
+        
         # Draw the graph on the grid
-        graph.draw(screen, (-2*pi, 2*pi), (-200, 200), (asset_loader.pictures["grid"][1][0],
-                                                    asset_loader.pictures["grid"][1][1],
-                                                    asset_loader.pictures["grid"][0].get_width(),
-                                                    asset_loader.pictures["grid"][0].get_height()),
-                                                    step=0.1)
+        graph.draw()
 
         pygame.display.flip()
         clock.tick(60)
