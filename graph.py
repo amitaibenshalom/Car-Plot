@@ -1,18 +1,16 @@
 """
-This class represents a graph (function) that can be drawn on the screen.
+This module contains the Graph class, which is used to draw a graph of a given function on a Pygame screen.
+The graph is drawn on a sub-surface of the screen, and the function is defined by the user.
+The function can be any callable that takes a single argument (x) and returns a single value (y).
 """
 
 import pygame
 from pygame.locals import *
 import numpy as np
-from consts import *
-from math import pi, sin, cos, tan, atan2, sqrt
+from consts import GRAPH_WIDTH, GRAPH_COLOR
 
 
 class Graph:
-    """
-    This class represents a graph (function) that can be drawn on the screen.
-    """
 
     def __init__(self, screen, function, x_range, y_range, sub_surface, color=GRAPH_COLOR, width=GRAPH_WIDTH, step=0.1):
         """

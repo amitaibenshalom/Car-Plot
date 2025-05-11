@@ -20,7 +20,7 @@ ASSETS_DIR = os.path.join(os.path.dirname(__file__), "assets")  # directory wher
 
 # dict of picture names, their sizes and position to load on screen
 PICTURES_TO_LOAD = {
-    "background3.png": (("full", "full"), (0, 0)),
+    "background.png": (("full", "full"), (0, 0)),
     "grid.png": (("70%", "70%"),("25%", "25%")),
 }
 
