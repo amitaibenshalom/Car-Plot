@@ -6,7 +6,7 @@ Car Plotter is an interactive exhibit designed to teach how graphs, such as f(x)
 
 1. Clone the repository:
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/amitaibenshalom/Car-Plot.git
     ```
 2. Navigate to the project directory:
     ```bash

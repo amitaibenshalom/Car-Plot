@@ -7,12 +7,12 @@ The function can be any callable that takes a single argument (x) and returns a 
 import pygame
 from pygame.locals import *
 import numpy as np
-from consts import GRAPH_WIDTH, GRAPH_COLOR
+from consts import GRAPH_COLOR
 
 
 class Graph:
 
-    def __init__(self, screen, function, x_range, y_range, sub_surface, color=GRAPH_COLOR, width=GRAPH_WIDTH, step=0.1):
+    def __init__(self, screen, function, x_range, y_range, sub_surface, color=GRAPH_COLOR, width=3, step=1):
         """
         Initialize the graph with a function, x and y ranges, sub-surface, color and width.
         :param screen: The screen to draw on.
@@ -50,10 +50,20 @@ class Graph:
         points = []
         for x in np.arange(self.x_range[0], self.x_range[1], self.step):
             y = self.function(x)  # Calculate y value using the function
-            if self.y_range[0] <= y <= self.y_range[1]:  # Check if y is within the range
-                points.append((x, y))  # Append the point if it's within the y range
+            points.append((x, y))  # Append the point to the list
         if len(points) < 2:
             return  # Not enough points to draw a line
+        
+        font = pygame.font.Font(None, 24)
+        text_x_min = font.render(f"X: {round(self.x_range[0], 2)}", True, (0, 0, 0))
+        text_x_max = font.render(f"X: {round(self.x_range[1], 2)}", True, (0, 0, 0))
+        text_y_min = font.render(f"Y: {round(self.y_range[0], 2)}", True, (0, 0, 0))
+        text_y_max = font.render(f"Y: {round(self.y_range[1], 2)}", True, (0, 0, 0))
+
+        graph_surface.blit(text_x_min, (5, height - 15))
+        graph_surface.blit(text_x_max, (width - text_x_max.get_width() - 5, height - 20))
+        graph_surface.blit(text_y_min, (5, height - 30))
+        graph_surface.blit(text_y_max, (5, 5))
 
         screen_points = [(int((x - self.x_range[0]) * x_scale),
                           int((y - self.y_range[0]) * y_scale)) for x, y in points]  # Convert to screen coordinates
