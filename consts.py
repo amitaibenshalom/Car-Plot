@@ -27,6 +27,5 @@ ASSETS_DIR = os.path.join(os.path.dirname(__file__), "assets")  # directory wher
 PICTURES_TO_LOAD = {
     "background.png": (("full", "full"), (0, 0)),
     "grid.png": (("70%", "70%"),("25%", "25%")),
-    "bar.png": (("10%", "40%"), ("7%", "25%"))
 }
 

@@ -45,7 +45,7 @@ def main():
         x: in range [0, 1000]
         returns y in range roughly [-500, 500]
         """
-        y = 250 * math.sin(x * 0.02)                                # Base wave
+        y = 250 * math.sin(x * 0.02)                               # Base wave
         y += 120 * math.sin(x * 0.1 + math.sin(x * 0.03))          # Nested sine wave
         y += 90 * math.cos(x * 0.005 + math.sin(x * 0.01))         # Curvy wiggles
         y += 70 * math.tan(math.sin(x * 0.004)) / 2                # Occasional spikes
@@ -165,13 +165,8 @@ def main():
         user.calc_score(graphs[graph_index])
 
         asset_loader.render(screen)
-        
-        # Draw the graph on the grid
         graphs[graph_index].draw()
-
         user.render_all()
-
-        # time.sleep(TIME_DELAY)  # Delay to control the speed of the car
 
         pygame.display.flip()
         clock.tick(1000)
