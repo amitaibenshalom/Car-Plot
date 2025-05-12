@@ -11,6 +11,7 @@ from asset_loader import *
 from graph import Graph
 from user import User
 from logs import *
+# from joystick import Joystick
 
 
 def main():
@@ -21,6 +22,8 @@ def main():
     pygame.init()
     pygame.display.set_caption("Car Plot")
     clock = pygame.time.Clock()
+
+    # joystick = Joystick(logger=logger)
     
     if FULLSCREEN:
         screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
@@ -158,6 +161,27 @@ def main():
                     user.move_y(True)
                 else:
                     user.move_y(False)
+
+            # if event.type == pygame.JOYDEVICEREMOVED:
+            #     print("Joystick disconnected.")
+            #     print("Trying to reconnect...")
+            #     joystick.joystick = None
+            #     joystick.reconnect_waiting = True
+
+            # elif event.type == pygame.JOYDEVICEADDED:
+            #     if joystick.reconnect_waiting:
+            #         joystick.joystick = joystick.try_connect()
+            #         if joystick.joystick:
+            #             joystick.reconnect_waiting = False
+
+        # if joystick.joystick:
+        #     try:
+        #         axis_0 = joystick.get_axis(0)
+        #         print(f"Axis 0 value: {axis_0:.4f}")
+        #     except pygame.error:
+        #         print("Joystick read error.")
+        #         joystick = None
+        #         reconnect_waiting = True
 
         user.add_point()
         has_done_graph = user.move_x()

@@ -13,7 +13,7 @@ from consts import GRAPH_COLOR
 
 class Graph:
 
-    def __init__(self, screen, function, x_range, y_range, sub_surface, title, color=GRAPH_COLOR, width=3, step=1):
+    def __init__(self, screen, function, x_range, y_range, sub_surface, title, color=GRAPH_COLOR, width=10, step=1):
         """
         Initialize the graph with a function, x and y ranges, sub-surface, color and width.
         :param screen: The screen to draw on.

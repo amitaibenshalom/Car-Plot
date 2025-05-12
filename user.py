@@ -5,11 +5,11 @@ Purpose: User class for the car plotter exhibit. It handles the user movement, d
 
 import pygame
 from pygame.locals import *
-from consts import USER_GRAPH_COLOR, USER_GRAPH_MAX_POINTS, USER_GRAPH_STEP
+from consts import USER_GRAPH_COLOR, USER_GRAPH_MAX_POINTS, USER_GRAPH_STEP, BLUE, YELLOW
 from asset_loader import convert_to_pixels
 
 class User:
-    def __init__(self, screen, x_range, y_range, sub_surface, max_points=USER_GRAPH_MAX_POINTS, color=USER_GRAPH_COLOR, graph_line_width=3, step=[USER_GRAPH_STEP, 10]):
+    def __init__(self, screen, x_range, y_range, sub_surface, max_points=USER_GRAPH_MAX_POINTS, color=USER_GRAPH_COLOR, graph_line_width=10, step=[USER_GRAPH_STEP, 10]):
         """
         Initialize the user with a position, a list of points, and a step size.
         :param screen: The screen to draw on.
@@ -163,17 +163,17 @@ class User:
         Draw the lines from the user position to the edges of the graph.
         """
         pos_x, pos_y, width, height = self.sub_surface
-
-        pygame.draw.circle(self.screen, self.color, (pos_x + int((self.position[0] - self.x_range[0]) * self.scale[0]),
-                                                pos_y + int((self.position[1] - self.y_range[0]) * self.scale[1])), 5)
         
-        pygame.draw.line(self.screen, self.color, (pos_x + int((self.position[0] - self.x_range[0]) * self.scale[0]),
+        pygame.draw.line(self.screen, BLUE, (pos_x + int((self.position[0] - self.x_range[0]) * self.scale[0]),
                                                 pos_y + int((self.position[1] - self.y_range[0]) * self.scale[1])),
                                                 (pos_x, pos_y + int((self.position[1] - self.y_range[0]) * self.scale[1])), 2)
-        pygame.draw.line(self.screen, self.color, (pos_x + int((self.position[0] - self.x_range[0]) * self.scale[0]),
+        pygame.draw.line(self.screen, BLUE, (pos_x + int((self.position[0] - self.x_range[0]) * self.scale[0]),
                                                 pos_y + int((self.position[1] - self.y_range[0]) * self.scale[1])),
                                                 (pos_x + int((self.position[0] - self.x_range[0]) * self.scale[0]),
                                                 pos_y + height), 2)
+        
+        pygame.draw.circle(self.screen, YELLOW, (pos_x + int((self.position[0] - self.x_range[0]) * self.scale[0]),
+                                                pos_y + int((self.position[1] - self.y_range[0]) * self.scale[1])), 10)
         
         if len(self.user_points) >= self.max_points:
             pygame.draw.line(self.screen, (128, 128, 128), (pos_x + int((self.user_points[-self.max_points][0] - self.x_range[0]) * self.scale[0]),
