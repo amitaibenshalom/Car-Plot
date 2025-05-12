@@ -22,6 +22,8 @@ USER_GRAPH_COLOR = GREEN  # color of the user graph
 
 USER_GRAPH_STEP = 1  # step size for the user in x direction every frame
 USER_GRAPH_MAX_POINTS = 1  # maximum number of points to consider for the score calculation
+USER_GRAPH_LINE_WIDTH = 10  # width of the user graph line
+GRAPH_LINE_WIDTH = 10  # width of the graph line (for the background functions)
 
 ASSETS_DIR = os.path.join(os.path.dirname(__file__), "assets")  # directory where the assets are stored
 
@@ -37,5 +39,5 @@ MAX_SIZE_PER_LOG_FILE = 1 * 1024 * 1024  # 1MB
 BACKUP_COUNT = 10  # max number of log files, if all 10 are full, the first one will be deleted, rotating the rest 
 
 # joystick values
-JOYSTICK_MAX_VALUE = 0.460  # max value of the joystick
-JOYSTICK_MIN_VALUE = 0.375  # min value of the joystick
+JOYSTICK_MAX_VALUE = 0.400  # max value of the joystick
+JOYSTICK_MIN_VALUE = 0.370  # min value of the joystick

@@ -8,12 +8,12 @@ The function can be any callable that takes a single argument (x) and returns a 
 import pygame
 from pygame.locals import *
 import numpy as np
-from consts import GRAPH_COLOR
+from consts import GRAPH_COLOR, GRAPH_LINE_WIDTH
 
 
 class Graph:
 
-    def __init__(self, screen, function, x_range, y_range, sub_surface, title, color=GRAPH_COLOR, width=10, step=1):
+    def __init__(self, screen, function, x_range, y_range, sub_surface, title, color=GRAPH_COLOR, width=GRAPH_LINE_WIDTH, step=1):
         """
         Initialize the graph with a function, x and y ranges, sub-surface, color and width.
         :param screen: The screen to draw on.

@@ -5,11 +5,11 @@ Purpose: User class for the car plotter exhibit. It handles the user movement, d
 
 import pygame
 from pygame.locals import *
-from consts import USER_GRAPH_COLOR, USER_GRAPH_MAX_POINTS, USER_GRAPH_STEP, BLUE, YELLOW
+from consts import USER_GRAPH_COLOR, USER_GRAPH_MAX_POINTS, USER_GRAPH_STEP, USER_GRAPH_LINE_WIDTH, BLUE, YELLOW
 from asset_loader import convert_to_pixels
 
 class User:
-    def __init__(self, screen, x_range, y_range, sub_surface, max_points=USER_GRAPH_MAX_POINTS, color=USER_GRAPH_COLOR, graph_line_width=10, step=[USER_GRAPH_STEP, 10]):
+    def __init__(self, screen, x_range, y_range, sub_surface, max_points=USER_GRAPH_MAX_POINTS, color=USER_GRAPH_COLOR, graph_line_width=USER_GRAPH_LINE_WIDTH, step=[USER_GRAPH_STEP, 10]):
         """
         Initialize the user with a position, a list of points, and a step size.
         :param screen: The screen to draw on.
@@ -173,19 +173,19 @@ class User:
                                                 pos_y + height), 2)
         
         pygame.draw.circle(self.screen, YELLOW, (pos_x + int((self.position[0] - self.x_range[0]) * self.scale[0]),
-                                                pos_y + int((self.position[1] - self.y_range[0]) * self.scale[1])), 10)
+                                                pos_y + int((self.position[1] - self.y_range[0]) * self.scale[1])), 8)
         
         if len(self.user_points) >= self.max_points:
             pygame.draw.line(self.screen, (128, 128, 128), (pos_x + int((self.user_points[-self.max_points][0] - self.x_range[0]) * self.scale[0]),
                                                     pos_y + height),
                                                     (pos_x + int((self.position[0] - self.x_range[0]) * self.scale[0]),
-                                                    pos_y + height), 10)
+                                                    pos_y + height), 8)
             
         elif len(self.user_points) > 0:
             pygame.draw.line(self.screen, (128, 128, 128), (pos_x + int((self.user_points[0][0] - self.x_range[0]) * self.scale[0]),
                                                     pos_y + height),
                                                     (pos_x + int((self.position[0] - self.x_range[0]) * self.scale[0]),
-                                                    pos_y + height), 10)
+                                                    pos_y + height), 8)
             
     def render_all(self):
         """
