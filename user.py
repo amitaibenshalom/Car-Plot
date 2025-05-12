@@ -125,10 +125,9 @@ class User:
         pos_x = convert_to_pixels(bar[0], self.screen.get_width())
         pos_y = convert_to_pixels(bar[1], self.screen.get_height())
         width = convert_to_pixels(bar[2], self.screen.get_width())
-        height = convert_to_pixels(bar[3], self.screen.get_height())
-        
+        height = convert_to_pixels(bar[3], self.screen.get_height())        
         draw_gradient_bar(self.screen, pos_x, pos_y, width, height, self.score)
-        # Draw the score text
+
         font = pygame.font.Font(None, 70)
         text_surface = font.render(f"{self.score}%", True, (0, 0, 0))
         text_rect = text_surface.get_rect(center=(pos_x + width // 2, pos_y - 30))
@@ -163,9 +162,6 @@ class User:
 
         pygame.draw.circle(self.screen, self.color, (pos_x + int((self.position[0] - self.x_range[0]) * self.scale[0]),
                                                 pos_y + int((self.position[1] - self.y_range[0]) * self.scale[1])), 5)
-        
-        # pygame.draw.circle(self.screen, self.color, (pos_x,
-        #                                         pos_y + int((self.position[1] - self.y_range[0]) * self.scale[1])), 3)
         
         pygame.draw.line(self.screen, self.color, (pos_x + int((self.position[0] - self.x_range[0]) * self.scale[0]),
                                                 pos_y + int((self.position[1] - self.y_range[0]) * self.scale[1])),

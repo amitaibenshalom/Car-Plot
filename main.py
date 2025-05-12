@@ -1,19 +1,22 @@
+"""
+File: main.py
+Purpose: Main function for the car plotter exhibit
+"""
+
+import math
 import pygame
 from pygame.locals import *
 from consts import *
 from asset_loader import *
 from graph import Graph
 from user import User
-import math
+from logs import *
 
-"""
-This file contains the main function for the exhibit
-It initializes the Pygame window, loads assets, and runs the main loop.
-It handles user input, updates the user position, and calculates the score based on the graph.
-It also handles the drawing of the graph and the user points on the screen.
-"""
 
 def main():
+
+    logger = get_logger()
+    logger.info("Starting Car Plotter Exhibit")
     
     pygame.init()
     pygame.display.set_caption("Car Plot")
@@ -164,6 +167,7 @@ def main():
 
         user.calc_score(graphs[graph_index])
 
+        screen.fill(BLACK)
         asset_loader.render(screen)
         graphs[graph_index].draw()
         user.render_all()

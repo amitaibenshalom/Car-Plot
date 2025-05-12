@@ -102,12 +102,9 @@ class AssetLoader:
 
     def render(self, screen):
         """
-        Render all loaded pictures on the screen.
+        Render all loaded pictures on the screen at their specified positions.
         :param screen: The screen to render the pictures on.
         """
-        # Fill the screen with a black color
-        screen.fill((0, 0, 0))
-        # Draw each picture at its specified position
         for _, (image, pos) in self.pictures.items():
             screen.blit(image, pos)
 

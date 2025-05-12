@@ -29,3 +29,9 @@ PICTURES_TO_LOAD = {
     "grid.png": (("70%", "70%"),("25%", "25%")),
 }
 
+# logging values
+LOG_FOLDER = os.path.join(os.path.dirname(__file__), "logs")  # get the path of the logs folder
+MAX_SIZE_PER_LOG_FILE = 1 * 1024 * 1024  # 1MB
+BACKUP_COUNT = 10  # max number of log files, if all 10 are full, the first one will be deleted, rotating the rest 
+
+
