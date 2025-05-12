@@ -36,4 +36,6 @@ LOG_FOLDER = os.path.join(os.path.dirname(__file__), "logs")  # get the path of 
 MAX_SIZE_PER_LOG_FILE = 1 * 1024 * 1024  # 1MB
 BACKUP_COUNT = 10  # max number of log files, if all 10 are full, the first one will be deleted, rotating the rest 
 
-
+# joystick values
+JOYSTICK_MAX_VALUE = 0.460  # max value of the joystick
+JOYSTICK_MIN_VALUE = 0.375  # min value of the joystick
