@@ -2,6 +2,7 @@
 Filename: logs.py
 Purpose: Logging functions for the car plotter exhibit
 """
+
 import logging
 from logging.handlers import RotatingFileHandler
 import os

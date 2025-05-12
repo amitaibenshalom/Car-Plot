@@ -1,5 +1,6 @@
 """
-This module contains the Graph class, which is used to draw a graph of a given function on a Pygame screen.
+Filename: graph.py
+Purpose: Graph class for the car plotter exhibit.
 The graph is drawn on a sub-surface of the screen, and the function is defined by the user.
 The function can be any callable that takes a single argument (x) and returns a single value (y).
 """

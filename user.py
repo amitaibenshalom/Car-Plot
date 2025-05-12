@@ -1,11 +1,15 @@
+"""
+Filename: user.py
+Purpose: User class for the car plotter exhibit. It handles the user movement, drawing of the user's graph and calculating the score based on the user's graph.
+"""
 
 import pygame
 from pygame.locals import *
-from consts import USER_GRAPH_COLOR, USER_GRAPH_MAX_POINTS, GREEN
+from consts import USER_GRAPH_COLOR, USER_GRAPH_MAX_POINTS, USER_GRAPH_STEP
 from asset_loader import convert_to_pixels
 
 class User:
-    def __init__(self, screen, x_range, y_range, sub_surface, max_points=USER_GRAPH_MAX_POINTS, color=USER_GRAPH_COLOR, graph_line_width=3, step=[1, 10]):
+    def __init__(self, screen, x_range, y_range, sub_surface, max_points=USER_GRAPH_MAX_POINTS, color=USER_GRAPH_COLOR, graph_line_width=3, step=[USER_GRAPH_STEP, 10]):
         """
         Initialize the user with a position, a list of points, and a step size.
         :param screen: The screen to draw on.

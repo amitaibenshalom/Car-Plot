@@ -1,6 +1,10 @@
+"""
+Filename: asset_loader.py
+Purpose: Asset loading functions for the car plotter exhibit
+"""
+
 import os
 import pygame
-
 
 class AssetLoader:
     """

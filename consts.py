@@ -1,5 +1,6 @@
 """
-This file contains constants for the exhibit
+Filename: consts.py
+Purpose: Constants for the car plotter exhibit
 """
 import os
 
@@ -18,7 +19,7 @@ BLUE = (0, 0, 255)
 GRAPH_COLOR = RED  # color of the graph
 USER_GRAPH_COLOR = GREEN  # color of the user graph
 
-USER_GRAPH_STEP = 0.1  # step size for the user in x direction every frame
+USER_GRAPH_STEP = 1  # step size for the user in x direction every frame
 USER_GRAPH_MAX_POINTS = 1  # maximum number of points to consider for the score calculation
 
 ASSETS_DIR = os.path.join(os.path.dirname(__file__), "assets")  # directory where the assets are stored
